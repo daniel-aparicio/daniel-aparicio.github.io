@@ -1,509 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Daniel Aparicio-Pérez</title>
-  <meta name="description" content="Daniel Aparicio-Pérez is an Assistant Professor of Economics at the University of Valencia, specialising in regional economics, political economy, and causal inference methods."/>
+  <meta name="description" content="Daniel Aparicio-Pérez is an Assistant Professor of Economics at the University of Valencia, working on regional economics, political economy, and causal inference."/>
   <meta name="keywords" content="Daniel Aparicio-Pérez, economics, regional economics, political economy, difference-in-differences, synthetic control, University of Valencia, causal inference"/>
   <meta name="author" content="Daniel Aparicio-Pérez"/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://daniel-aparicio.github.io"/>
-  <!-- Open Graph -->
   <meta property="og:title" content="Daniel Aparicio-Pérez"/>
-  <meta property="og:description" content="Assistant Professor of Economics at the University of Valencia. Research in regional economics, political economy, and causal inference."/>
+  <meta property="og:description" content="Assistant Professor of Economics at the University of Valencia. Regional economics, political economy, causal inference."/>
   <meta property="og:url" content="https://daniel-aparicio.github.io"/>
+  <meta property="og:image" content="https://daniel-aparicio.github.io/photo.jpeg"/>
   <meta property="og:type" content="website"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:   #1a2744;
-      --accent: #c0392b;
-      --light:  #f7f8fa;
-      --text:   #2d2d2d;
-      --muted:  #6b7280;
-      --border: #e5e7eb;
+      --ink:    #2f3237;
+      --muted:  #6f7680;
+      --head:   #1a2744;
+      --link:   #1f4e79;
+      --hover:  #12385c;
+      --rule:   #e3e6ea;
+      --bg:     #ffffff;
+      --soft:   #f6f7f9;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink:    #d6d9de;
+        --muted:  #949aa3;
+        --head:   #9dc0e0;
+        --link:   #7fb3dd;
+        --hover:  #a9cdec;
+        --rule:   #2b3039;
+        --bg:     #14161b;
+        --soft:   #1b1e25;
+      }
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
-      background: #fff;
-      line-height: 1.7;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--navy);
+    .wrap {
+      max-width: 46rem;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 4rem;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--hover); text-decoration: underline; }
+
+    /* HEADER */
+    header.masthead {
       display: flex;
-      justify-content: space-between;
+      gap: 1.6rem;
       align-items: center;
-      padding: 0 2.5rem;
-      height: 60px;
-    }
-
-    nav .brand {
-      color: #fff;
-      font-weight: 600;
-      font-size: 1rem;
-      letter-spacing: .03em;
-      text-decoration: none;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
-
-    nav ul a {
-      color: rgba(255,255,255,.75);
-      text-decoration: none;
-      font-size: .9rem;
-      font-weight: 500;
-      transition: color .2s;
-    }
-
-    nav ul a:hover { color: #fff; }
-
-    /* ── HERO ── */
-    .hero {
-      background: var(--navy);
-      color: #fff;
-      padding: 5rem 2.5rem 4rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .hero-inner {
-      max-width: 860px;
-      width: 100%;
-      display: flex;
-      gap: 3rem;
-      align-items: flex-start;
-    }
-
-    .hero-photo {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid rgba(255,255,255,.25);
-      flex-shrink: 0;
-      background: rgba(255,255,255,.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      color: rgba(255,255,255,.4);
-    }
-
-    .hero-text h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 600;
-      margin-bottom: .4rem;
-    }
-
-    .hero-text .title {
-      font-size: 1rem;
-      color: rgba(255,255,255,.7);
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-text p {
-      font-size: .97rem;
-      color: rgba(255,255,255,.85);
-      max-width: 560px;
       margin-bottom: 1.6rem;
     }
 
-    .hero-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .7rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: .45rem 1.1rem;
-      border-radius: 4px;
-      font-size: .85rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: opacity .2s;
-    }
-
-    .btn:hover { opacity: .85; }
-
-    .btn-white {
-      background: #fff;
-      color: var(--navy);
-    }
-
-    .btn-outline {
-      border: 1.5px solid rgba(255,255,255,.5);
-      color: #fff;
-    }
-
-    /* ── SECTIONS ── */
-    section {
-      padding: 4rem 2.5rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    section:nth-child(even) { background: var(--light); }
-
-    .section-inner {
-      max-width: 860px;
-      width: 100%;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--navy);
-      margin-bottom: 1.8rem;
-      padding-bottom: .6rem;
-      border-bottom: 2px solid var(--accent);
-      display: inline-block;
-    }
-
-    /* ── RESEARCH ── */
-    .paper {
-      margin-bottom: 1.8rem;
-      padding-left: 1rem;
-      border-left: 3px solid var(--border);
-    }
-
-    .paper h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: .25rem;
-      color: var(--navy);
-    }
-
-    .paper .meta {
-      font-size: .85rem;
-      color: var(--muted);
-      margin-bottom: .4rem;
-    }
-
-    .paper p {
-      font-size: .9rem;
-      color: var(--text);
-    }
-
-    .paper a {
-      font-size: .82rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .paper a:hover { text-decoration: underline; }
-
-    .tag {
-      display: inline-block;
-      background: #eef2ff;
-      color: #3730a3;
-      font-size: .75rem;
-      padding: .15rem .55rem;
-      border-radius: 999px;
-      margin-right: .3rem;
-      margin-bottom: .3rem;
-    }
-
-    /* ── TEACHING ── */
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .course-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.2rem 1.4rem;
-    }
-
-    .course-card h3 {
-      font-size: .97rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: .3rem;
-    }
-
-    .course-card .level {
-      font-size: .8rem;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: .4rem;
-    }
-
-    .course-card p {
-      font-size: .85rem;
-      color: var(--muted);
-    }
-
-    /* ── CONTACT ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: .8rem;
-    }
-
-    .contact-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: var(--navy);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .9rem;
+    .avatar {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      object-fit: cover;
       flex-shrink: 0;
     }
 
-    .contact-item h4 {
-      font-size: .82rem;
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 600;
+      color: var(--head);
+      line-height: 1.15;
+      margin-bottom: .3rem;
+    }
+
+    .affil {
       color: var(--muted);
-      margin-bottom: .1rem;
+      font-size: .97rem;
+      line-height: 1.45;
     }
 
-    .contact-item a, .contact-item p {
-      font-size: .92rem;
-      color: var(--text);
-      text-decoration: none;
+    .affil a { color: var(--muted); }
+
+    .links {
+      margin-top: .6rem;
+      font-size: .93rem;
     }
 
-    .contact-item a:hover { color: var(--accent); }
+    .links a { margin-right: .9rem; white-space: nowrap; }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--navy);
-      color: rgba(255,255,255,.5);
-      text-align: center;
-      padding: 1.5rem;
+    /* SECTION NAV */
+    .toc {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: .55rem 0;
+      margin-bottom: 2.6rem;
+      font-size: .84rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .toc a { margin-right: 1.4rem; color: var(--muted); }
+    .toc a:hover { color: var(--link); text-decoration: none; }
+
+    /* SECTIONS */
+    section { margin-bottom: 2.8rem; }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--head);
+      margin-bottom: 1.1rem;
+    }
+
+    h3.sub {
       font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.8rem 0 .9rem;
     }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .hero-inner { flex-direction: column; gap: 1.5rem; }
-      .hero-photo { width: 120px; height: 120px; }
-      .hero-text h1 { font-size: 1.7rem; }
-      .contact-grid { grid-template-columns: 1fr; }
-      nav { padding: 0 1.2rem; }
-      nav ul { gap: 1.2rem; }
+    section > p { margin-bottom: .9rem; }
+
+    /* NEWS */
+    .news { list-style: none; font-size: .95rem; }
+    .news li { margin-bottom: .45rem; }
+    .news .when { color: var(--muted); }
+
+    /* ENTRIES */
+    .entry { margin-bottom: 1.5rem; }
+
+    .entry .title {
+      font-weight: 600;
+      color: var(--head);
+      display: block;
+    }
+
+    .entry .meta {
+      font-size: .93rem;
+      color: var(--muted);
+    }
+
+    .res {
+      font-size: .87rem;
+      margin-top: .15rem;
+    }
+
+    .res a { margin-right: .8rem; }
+
+    /* ABSTRACT TOGGLE */
+    details { margin-top: .15rem; }
+
+    details > summary {
+      list-style: none;
+      cursor: pointer;
+      display: inline-block;
+      font-size: .87rem;
+      color: var(--link);
+    }
+
+    details > summary::-webkit-details-marker { display: none; }
+
+    details > summary::after {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: .4em;
+      vertical-align: middle;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid currentColor;
+    }
+
+    details[open] > summary::after {
+      border-top: 0;
+      border-bottom: 5px solid currentColor;
+    }
+
+    details > summary:hover { color: var(--hover); }
+
+    details .abstract {
+      font-size: .92rem;
+      color: var(--ink);
+      background: var(--soft);
+      border-left: 2px solid var(--rule);
+      padding: .7rem .9rem;
+      margin-top: .5rem;
+      text-align: justify;
+    }
+
+    /* TEACHING */
+    .materials { list-style: none; font-size: .9rem; margin-top: .35rem; }
+    .materials li { margin-bottom: .18rem; }
+    .editions { list-style: none; font-size: .9rem; color: var(--muted); margin-top: .45rem; }
+    .editions li { margin-bottom: .18rem; }
+    .editions li::before { content: '\2013'; margin-right: .45em; }
+    .desc { font-size: .93rem; }
+    .soon { color: var(--muted); font-size: .88rem; margin-top: .2rem; }
+
+    /* CONTACT */
+    .contact { font-size: .95rem; }
+    .contact div { margin-bottom: .25rem; }
+    .contact .label { color: var(--muted); display: inline-block; min-width: 5.5rem; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding-top: 1rem;
+      color: var(--muted);
+      font-size: .84rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .wrap { padding: 2.2rem 1.2rem 3rem; }
+      header.masthead { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .avatar { width: 96px; height: 96px; }
+      h1 { font-size: 1.6rem; }
+      .toc a { margin-right: 1rem; }
+      .contact .label { display: block; }
     }
   </style>
 </head>
 <body>
+<div class="wrap">
 
-<!-- NAV -->
-<nav>
-  <a class="brand" href="#home">Daniel Aparicio-Perez</a>
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#working-papers">Working Papers</a></li>
-    <li><a href="#teaching">Teaching</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+<!-- HEADER -->
+<header class="masthead">
+  <img src="photo.jpeg" alt="Daniel Aparicio-Pérez" class="avatar"/>
+  <div>
+    <h1>Daniel Aparicio-Pérez</h1>
+    <p class="affil">
+      Assistant Professor, Department of Economic Analysis<br/>
+      <a href="https://www.uv.es/uvweb/universidad/es/ficha-persona-1285950309813.html?p2=apeda6@uv.es&amp;idA=" target="_blank">Universitat de València</a><br/>
+      daniel.aparicio (at) uv.es
+    </p>
+    <p class="links">
+      <a href="cv.pdf" target="_blank">CV</a>
+      <a href="https://scholar.google.com/citations?user=hhO930wAAAAJ&amp;hl=es" target="_blank">Google Scholar</a>
+      <a href="https://orcid.org/0000-0002-6134-5016" target="_blank">ORCID</a>
+      <a href="https://github.com/daniel-aparicio" target="_blank">GitHub</a>
+    </p>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#about">About</a>
+  <a href="#news">News</a>
+  <a href="#publications">Publications</a>
+  <a href="#working-papers">Working Papers</a>
+  <a href="#teaching">Teaching</a>
 </nav>
 
-<!-- HERO -->
-<div class="hero" id="home">
-  <div class="hero-inner">
-    <img src="photo.jpeg" alt="Daniel Aparicio-Pérez" class="hero-photo">
+<!-- ABOUT -->
+<section id="about">
+  <h2>About</h2>
+  <p>
+    I am an Assistant Professor in the Department of Economic Analysis at the Universitat de
+    València. My research is in <strong>regional economics</strong> and <strong>political
+    economy</strong>: how institutions, fiscal arrangements and public funds shape economic
+    development across regions, and why the effect of a policy differs across the places
+    that receive it.
+  </p>
+  <p>
+    The work is applied and methods-heavy: differences-in-differences with staggered and
+    non-binary treatments, synthetic control, grouped fixed effects, and machine learning used
+    to characterise heterogeneity rather than to predict. I also teach these methods to
+    researchers.
+  </p>
+</section>
 
-    <div class="hero-text">
-      <h1>Daniel Aparicio-Perez</h1>
-      <p class="title">Assistant Professor &middot; Department of Economic Analysis &middot; Universitat de Val&egrave;ncia</p>
-      <p>
-        I am an Assistant Professor in the Department of Economic Analysis at the
-        Universitat de Val&egrave;ncia. My primary research interests lie at the intersection
-        of <strong>regional economics</strong> and <strong>political economy</strong>.
-      </p>
-      <div class="hero-links">
-        <a href="cv.pdf" class="btn btn-white" target="_blank">Curriculum Vitae</a>
-        <a href="https://scholar.google.com/citations?user=hhO930wAAAAJ&hl=es" class="btn btn-outline" target="_blank">Google Scholar</a>
-        <a href="https://orcid.org/0000-0002-6134-5016" class="btn btn-outline" target="_blank">ORCID</a>
-        <a href="#research" class="btn btn-outline">Research</a>
-        <a href="#contact" class="btn btn-outline">Contact</a>
-      </div>
-    </div>
+<!-- NEWS -->
+<section id="news">
+  <h2>News</h2>
+  <ul class="news">
+    <li><span class="when">[September 2026]</span> Short course on causal inference with
+      differences-in-differences and synthetic controls at the Ivie, 14&ndash;16 September.</li>
+    <li><span class="when">[September 2026]</span> New courses at the Universitat de València:
+      Data Science and Economics (BSc in Data Science) and Econometrics (BSc in Business
+      Administration).</li>
+    <li><span class="when">[June 2026]</span> Earlier edition of the course taught for the Spanish
+      Association of International Economics and Finance (AEEFI).</li>
+    <li><span class="when">[March 2026]</span> New working paper on decentralization and
+      economic development, with Carolina Calatayud and Jordi Ripollés.</li>
+    <li><span class="when">[2025]</span> Three papers published, in the <em>Journal of Regional
+      Science</em>, <em>Political Studies</em> and <em>Papers in Regional Science</em>.</li>
+  </ul>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <h2>Publications</h2>
+
+  <div class="entry">
+    <a class="title" href="https://doi.org/10.1111/jors.12776" target="_blank">On the relative contributions of national and regional institutions to economic development</a>
+    <p class="meta">with M. Balaguer-Coll, J. Peiró-Palomino and E. Tortosa-Ausina<br/>
+      <em>Journal of Regional Science</em>, 2025</p>
+    <p class="res"><a href="https://doi.org/10.1111/jors.12776" target="_blank">DOI</a></p>
+    <details>
+      <summary>Abstract</summary>
+      <div class="abstract">Institutional quality is recognized as a fundamental driver of long-run growth (Acemoglu et al. 2005) and it has been widely studied at both country and regional levels in the economic growth literature. Nevertheless, the literature is scant on the question of how this relationship behaves when the hierarchical structure of regions and countries is considered. To fill this gap, we propose a novel approach to the question, relying on multilevel econometric techniques. We empirically analyze how much of the effect shown by institutional quality on regional economic development can be attributed to the quality of national institutions. We argue that ignoring the multilevel structure may lead to over-weighting the real influence of regional institutional quality and, conversely, under-weighting (or directly overlooking) the effect of the country's institutional quality on regional economic development. We present empirical evidence that the national institutional level outweighs the possible effect of lower government tiers have on a region's economic development.</div>
+    </details>
   </div>
-</div>
 
-<!-- RESEARCH -->
-<section id="research">
-  <div class="section-inner">
-    <h2 class="section-title">Research</h2>
-
-    <h3 style="font-size:.95rem; color:var(--muted); margin-bottom:1rem; font-weight:500;">Publications</h3>
-
-    <div class="paper">
-      <h3>On the relative contributions of national and regional institutions to economic development</h3>
-      <p class="meta">Aparicio-P&eacute;rez, D., Balaguer-Coll, M., Peir&oacute;-Palomino, J., Tortosa-Ausina, E. &middot; <em>Journal of Regional Science</em> &middot; 2025</p>
-      <a href="https://doi.org/10.1111/jors.12776" target="_blank">Published version</a>
-    </div>
-
-    <div class="paper">
-      <h3>On the impact of next generation EU funds: A regional synthetic control method approach</h3>
-      <p class="meta">Aparicio-P&eacute;rez, D., Espinosa, P., Pavia, J.M., Tortosa-Ausina, E. &middot; <em>Papers in Regional Science</em>, 104(2), 100082 &middot; 2025</p>
-      <a href="https://doi.org/10.1016/j.pirs.2024.100082" target="_blank">Published version</a>
-    </div>
-
-    <div class="paper">
-      <h3>Politics versus Economics: The Case of Spanish Regional Financing</h3>
-      <p class="meta">Aparicio-P&eacute;rez, D., Balaguer-Coll, M., Risa Hole, A., Tortosa-Ausina, E. &middot; <em>Political Studies</em> &middot; 2025</p>
-      <a href="https://doi.org/10.1177/00323217251315990" target="_blank">Published version</a>
-    </div>
-
-    <div class="paper">
-      <h3>Disentangling the heterogeneous effect of natural resources on economic growth</h3>
-      <p class="meta">Aparicio-P&eacute;rez, D., Ripoll&eacute;s, J. &middot; <em>Economic Modelling</em>, 142, 106927 &middot; 2025</p>
-      <a href="https://doi.org/10.1016/j.econmod.2024.106927" target="_blank">Published version</a>
-    </div>
-
-    <div class="paper">
-      <h3>The Export Strategy and SMEs Employment Resilience During Slump Periods</h3>
-      <p class="meta">Aparicio-P&eacute;rez, D., Calatayud, C., Rochina-Barrachina, M.E. &middot; <em>Economics: The Open-Access, Open-Assessment e-Journal</em>, 15(1), 163&ndash;186 &middot; 2022</p>
-      <a href="https://doi.org/10.1515/econ-2021-0011" target="_blank">Published version</a>
-    </div>
-
-    <br/>
-    <h3 style="font-size:.95rem; color:var(--muted); margin-bottom:.8rem; font-weight:500;">Research Interests</h3>
-    <div>
-      <span class="tag">Regional Economics</span>
-      <span class="tag">Political Economy</span>
-      <span class="tag">Causal Inference</span>
-      <span class="tag">Synthetic Control</span>
-      <span class="tag">Natural Resources</span>
-    </div>
+  <div class="entry">
+    <a class="title" href="https://doi.org/10.1177/00323217251315990" target="_blank">Politics versus economics: The case of Spanish regional financing</a>
+    <p class="meta">with M. Balaguer-Coll, A. Risa Hole and E. Tortosa-Ausina<br/>
+      <em>Political Studies</em>, 2025</p>
+    <p class="res"><a href="https://doi.org/10.1177/00323217251315990" target="_blank">DOI</a></p>
+    <details>
+      <summary>Abstract</summary>
+      <div class="abstract">The relationship between fiscal autonomy and regional economic outcomes is a critical question in political science and the study of federalism. This article examines how Spain's asymmetric fiscal system has shaped regional inequality, focusing on two opposing cases: the Basque Country, which enjoys significant fiscal autonomy through the 2002 Basque Economic Agreement, and the Valencian Community, persistently underfunded under the 2001 common financing model. While political justifications for asymmetric federalism are well-documented, the long-term economic consequences remain less explored. By analyzing these landmark fiscal arrangements, we provide evidence that asymmetric fiscal autonomy can exacerbate regional disparities. Our findings demonstrate that the Basque Country's fiscal autonomy significantly boosted gross domestic product per capita, while the Valencian Community's underfunding led to notable economic decline. These findings contribute to political debates on the tensions between territorial politics and economic equity, offering lessons for multilevel systems seeking to balance regional autonomy with economic cohesion.</div>
+    </details>
   </div>
+
+  <div class="entry">
+    <a class="title" href="https://doi.org/10.1016/j.pirs.2024.100082" target="_blank">On the impact of Next Generation EU funds: A regional synthetic control method approach</a>
+    <p class="meta">with P. Espinosa, J.M. Pavía and E. Tortosa-Ausina<br/>
+      <em>Papers in Regional Science</em>, 104(2), 100082, 2025</p>
+    <p class="res"><a href="https://doi.org/10.1016/j.pirs.2024.100082" target="_blank">DOI</a></p>
+    <details>
+      <summary>Abstract</summary>
+      <div class="abstract">The European Union's Next Generation EU (NGEU) program and its implementation through the Recovery and Resilience Facility (RRF) were conceived with the premise of promoting a coordinated fiscal response within the European Union to address the challenges arising from the COVID-19 crisis. The program provides Member States with access to grants and concessional loans aimed at supporting their recovery and resilience plans, which must incorporate coherent packages of reforms and investments. We evaluate the regional economic impact of the NGEU program in Spain, as one of the European countries most affected by the pandemic and, therefore, one of the program's main beneficiaries. To do so, we employ counterfactual techniques, which are particularly useful when considering alternative scenarios, such as the existence or absence of NGEU funds. According to our results, the economic impact led to an increase in GDP per capita in 2022, a perspective that is projected in 2023, 2024, and 2025 compared to a scenario without NGEU funds. This result is robust to various robustness checks. This analysis sheds light on the economic transformations attributable to the implementation of these exceptional measures.</div>
+    </details>
+  </div>
+
+  <div class="entry">
+    <a class="title" href="https://doi.org/10.1016/j.econmod.2024.106927" target="_blank">Disentangling the heterogeneous effect of natural resources on economic growth</a>
+    <p class="meta">with J. Ripollés<br/>
+      <em>Economic Modelling</em>, 142, 106927, 2025</p>
+    <p class="res"><a href="https://doi.org/10.1016/j.econmod.2024.106927" target="_blank">DOI</a></p>
+    <details>
+      <summary>Abstract</summary>
+      <div class="abstract">Previous studies on the impact of natural resources on economic growth have produced mixed results, which could be partly explained by unobserved heterogeneity that has not been adequately accounted for. This paper aims to identify this heterogeneity in the resource-growth nexus and explore the potential factors driving it. Using a panel dataset of 97 countries from 1990 to 2019, we apply a grouped fixed-effects estimator to identify groups of countries with distinct time-varying growth patterns and differing economic responses to natural resource wealth. We then use an ordered probit model to examine the drivers of this heterogeneity, focusing on institutional factors and other transmission channels. Our findings show that economic and political institutions, social capital, and export diversification are key to explaining group membership, with some groups experiencing positive and others negative resource-growth effects. This underscores the need to account for unobserved heterogeneity and consider institutional quality as multidimensional.</div>
+    </details>
+  </div>
+
+  <div class="entry">
+    <a class="title" href="https://doi.org/10.1515/econ-2021-0011" target="_blank">The export strategy and SMEs employment resilience during slump periods</a>
+    <p class="meta">with C. Calatayud and M.E. Rochina-Barrachina<br/>
+      <em>Economics: The Open-Access, Open-Assessment e-Journal</em>, 15(1), 163&ndash;186, 2022</p>
+    <p class="res"><a href="https://doi.org/10.1515/econ-2021-0011" target="_blank">DOI</a></p>
+    <details>
+      <summary>Abstract</summary>
+      <div class="abstract">The Spanish economy was the most hit by the Great Recession. It suffered a greater decrease in the gross domestic product (GDP), affecting especially internal demand. However, it suffered a greater increase in exports (the so-called Spanish "miracle"). Particularly, Spanish SMEs incorporation into exports has been spectacular since 2008. Further, this has coincided with a huge increase in unemployment. Therefore, our main objective is to investigate the moderating role of exports in job destruction associated with recessive contexts of domestic demand using Spanish manufacturing SMEs as a case study. We obtain for SMEs that export participation helps compensate for the decrease in the number of workers generated by a (domestic) downturn, also increasing their survival. Otherwise, SMEs' survival is negatively affected by financial constraints, production costs, and a recessive demand. This compensatory effect of exports on employment works in favor of permanent workers, meaning that the ratio of permanent to temporary workers may increase for SMEs during recessive periods. Finally, we provide evidence that supports that participation of SMEs in exports is also due to a reaction to the fall in the domestic demand (the so-called "venting out" hypothesis) and, mainly, that this occurs for firms with high utilization of its productive capacity.</div>
+    </details>
+  </div>
+
 </section>
 
 <!-- WORKING PAPERS -->
 <section id="working-papers">
-  <div class="section-inner">
-    <h2 class="section-title">Working Papers</h2>
+  <h2>Working Papers</h2>
 
-    <div class="paper">
-      <h3>Examining the heterogeneous link between decentralization and economic development</h3>
-      <p class="meta">Aparicio-P&eacute;rez, D., Calatayud, C., Ripoll&eacute;s, J. &middot; 2026</p>
-      <div style="margin-top:.6rem;">
-        <a href="papers/decentralization-wp.pdf" target="_blank">&#8594; Download PDF</a>
-      </div>
-    </div>
-
+  <div class="entry">
+    <a class="title" href="papers/decentralization-wp.pdf" target="_blank">Examining the heterogeneous link between decentralization and economic development</a>
+    <p class="meta">with C. Calatayud and J. Ripollés<br/>
+      Preliminary draft, March 2026</p>
+    <p class="res"><a href="papers/decentralization-wp.pdf" target="_blank">PDF</a></p>
+    <details>
+      <summary>Abstract</summary>
+      <div class="abstract">The relationship between decentralization and economic development has been widely studied, yet empirical findings remain inconclusive. This paper revisits the question by estimating an empirical growth model using a panel approach with grouped fixed-effects, which also allows us to endogenously identify latent clusters of countries that exhibit distinct economic responses to decentralization. The results reveal substantial heterogeneity that conventional economic and institutional variables do not explain. To investigate the sources of this heterogeneity, we complement the analysis with a Random Forest approach. The findings highlight underlying country characteristics, such as cultural diversity, urbanization, state capacity, transport infrastructure, economic complexity, and fiscal capacity, as key predictors of the observed cluster differences. Overall, our evidence indicates that part of the economic consequences of decentralization depends on conditions not captured by standard institutional proxies.</div>
+    </details>
   </div>
+
 </section>
 
 <!-- TEACHING -->
 <section id="teaching">
-  <div class="section-inner">
-    <h2 class="section-title">Teaching</h2>
+  <h2>Teaching</h2>
 
-    <!-- Formal teaching -->
-    <h3 style="font-size:.95rem; color:var(--muted); margin-bottom:1rem; font-weight:500;">Degree Courses &middot; Universitat de Val&egrave;ncia</h3>
+  <h3 class="sub">Universitat de Val&egrave;ncia &middot; 2026&ndash;2027</h3>
 
-    <div class="paper">
-      <h3>Introduction to Economics II</h3>
-      <p class="meta">Undergraduate &middot; Faculty of Economics &middot; 2025–2026</p>
-      <p style="font-size:.9rem; margin-bottom:.6rem;">Course slides (available topics):</p>
-      <div style="display:flex; flex-direction:column; gap:.3rem;">
-        <a href="slides/topic0-presentation.pdf" target="_blank" style="font-size:.85rem;">&#8594; Course Presentation &amp; Syllabus</a>
-        <a href="slides/topic1-2.pdf" target="_blank" style="font-size:.85rem;">&#8594; Topics 1–2: Measuring the Economy</a>
-        <a href="slides/topic3.pdf" target="_blank" style="font-size:.85rem;">&#8594; Topic 3: Production and Growth</a>
-        <a href="slides/topic4.pdf" target="_blank" style="font-size:.85rem;">&#8594; Topic 4: Saving, Investment &amp; the Financial System</a>
-        <a href="slides/topic5.pdf" target="_blank" style="font-size:.85rem;">&#8594; Topic 5: The Open Economy</a>
-      </div>
-    </div>
-
-    <br/>
-
-    <!-- External course -->
-    <h3 style="font-size:.95rem; color:var(--muted); margin-bottom:1rem; font-weight:500;">Short Courses &amp; Workshops</h3>
-
-    <div class="paper">
-      <h3>Advances in Differences-in-Differences and Synthetic Control</h3>
-      <p class="meta">Short Course for Researchers &middot; Universitat de Val&egrave;ncia</p>
-      <p style="font-size:.9rem; margin-bottom:.6rem;">A practical course on modern causal inference methods covering the canonical DiD design, TWFE models, staggered adoption, non-binary treatments, synthetic controls, and synthetic DiD.</p>
-      <div style="margin-top:.4rem;">
-        <a href="https://github.com/daniel-aparicio/did-scm-course" target="_blank">Course Materials</a>
-        &nbsp;&middot;&nbsp;
-        <a href="https://github.com/daniel-aparicio/DiD-y-SCM-curso" target="_blank">Slides (LaTeX)</a>
-      </div>
-    </div>
-
+  <div class="entry">
+    <span class="title">Data Science and Economics</span>
+    <p class="meta">BSc in Data Science</p>
+    <!-- Cuando el repositorio sea público, sustituir la línea .soon por:
+         <ul class="materials"><li><a href="https://github.com/daniel-aparicio/REPO" target="_blank">Course repository</a></li></ul> -->
+    <p class="soon">Materials will be posted here during the course.</p>
   </div>
+
+  <div class="entry">
+    <span class="title">Econometrics</span>
+    <p class="meta">BSc in Business Administration</p>
+    <!-- Ídem: enlazar aquí el repositorio del curso. -->
+    <p class="soon">Materials will be posted here during the course.</p>
+  </div>
+
+  <h3 class="sub">Short courses for researchers</h3>
+
+  <div class="entry">
+    <span class="title">Causal Inference with Differences-in-Differences and Synthetic Controls</span>
+    <p class="desc">The canonical DiD design, two-way fixed effects and its failures under staggered
+      adoption, non-binary treatments, synthetic control and synthetic DiD. Theory and applied
+      sessions in R.</p>
+    <ul class="editions">
+      <li>Ivie, Val&egrave;ncia &middot; 14&ndash;16 September 2026</li>
+      <li>Spanish Association of International Economics and Finance (AEEFI) &middot; 29&ndash;30 June 2026 &middot; 6.5 hours</li>
+      <li>Universidad de Castilla-La Mancha, Toledo &middot; 26&ndash;28 March 2025 &middot; 15 hours</li>
+    </ul>
+    <!-- Cuando el repositorio sea público:
+         <p class="res"><a href="https://github.com/daniel-aparicio/REPO" target="_blank">Slides and code</a></p> -->
+    <p class="soon">Slides and code will be released in a public repository.</p>
+  </div>
+
+  <h3 class="sub">Previous courses</h3>
+
+  <div class="entry">
+    <span class="title">Introduction to Economics II</span>
+    <p class="meta">BSc, Faculty of Economics, Universitat de Val&egrave;ncia &middot; 2025&ndash;2026</p>
+    <ul class="materials">
+      <li><a href="slides/topic0-presentation.pdf" target="_blank">Course presentation and syllabus</a></li>
+      <li><a href="slides/topic1-2.pdf" target="_blank">Topics 1&ndash;2: Measuring the economy</a></li>
+      <li><a href="slides/topic3.pdf" target="_blank">Topic 3: Production and growth</a></li>
+      <li><a href="slides/topic4.pdf" target="_blank">Topic 4: Saving, investment and the financial system</a></li>
+      <li><a href="slides/topic5.pdf" target="_blank">Topic 5: The open economy</a></li>
+    </ul>
+  </div>
+
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-inner">
-    <h2 class="section-title">Contact</h2>
-    <div class="contact-grid">
-
-      <div class="contact-item">
-        <div class="contact-icon">&#9993;</div>
-        <div>
-          <h4>Email</h4>
-          <a href="mailto:daniel.aparicio@uv.es">daniel.aparicio@uv.es</a>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">&#127970;</div>
-        <div>
-          <h4>Office</h4>
-          <a href="https://www.uv.es/uvweb/universidad/es/ficha-persona-1285950309813.html?p2=apeda6@uv.es&idA=" target="_blank">Department of Economic Analysis<br/>Universitat de Val&egrave;ncia</a>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">&#128218;</div>
-        <div>
-          <h4>Google Scholar</h4>
-          <a href="https://scholar.google.com/citations?user=hhO930wAAAAJ&hl=es" target="_blank">View profile</a>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">&#128196;</div>
-        <div>
-          <h4>ORCID</h4>
-          <a href="https://orcid.org/0000-0002-6134-5016" target="_blank">0000-0002-6134-5016</a>
-        </div>
-      </div>
-
+  <h2>Contact</h2>
+  <div class="contact">
+    <div><span class="label">Email</span> <a href="mailto:daniel.aparicio@uv.es">daniel.aparicio@uv.es</a></div>
+    <div><span class="label">Office</span> Department of Economic Analysis, Universitat de Val&egrave;ncia, Av. dels Tarongers s/n, 46022 Val&egrave;ncia</div>
+    <div><span class="label">Profiles</span>
+      <a href="https://scholar.google.com/citations?user=hhO930wAAAAJ&amp;hl=es" target="_blank">Google Scholar</a> &middot;
+      <a href="https://orcid.org/0000-0002-6134-5016" target="_blank">ORCID</a> &middot;
+      <a href="https://github.com/daniel-aparicio" target="_blank">GitHub</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  &copy; 2025 Daniel Aparicio-Perez &middot; Universitat de Val&egrave;ncia
+  &copy; 2026 Daniel Aparicio-P&eacute;rez &middot; Universitat de Val&egrave;ncia
 </footer>
 
+</div>
 </body>
 </html>
